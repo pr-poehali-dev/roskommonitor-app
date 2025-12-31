@@ -4,28 +4,28 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 220 26% 14%;
+    --background: 270 100% 99%;
+    --foreground: 240 10% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 26% 14%;
+    --card-foreground: 240 10% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 26% 14%;
+    --popover-foreground: 240 10% 4%;
 
-    --primary: 221 83% 25%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 72% 51%;
+    --secondary: 335 78% 56%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 25% 90%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 270 20% 95%;
+    --muted-foreground: 240 5% 45%;
 
-    --accent: 221 83% 25%;
+    --accent: 198 88% 48%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 214.3 31.8% 91.4%;
@@ -132,10 +132,40 @@
 @keyframes pulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
   }
   50% {
-    box-shadow: 0 0 20px 10px rgba(220, 38, 38, 0);
+    box-shadow: 0 0 30px 15px rgba(168, 85, 247, 0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -146,18 +176,59 @@
 }
 
 .coin-animation {
-  animation: coinDrop 0.6s ease-out;
+  animation: coinDrop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .roulette-spin {
-  animation: spin 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  animation:
+    spin 3s cubic-bezier(0.17, 0.67, 0.12, 0.99),
+    pulseGlow 3s ease-in-out;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out forwards;
 }
 
 @keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(900deg) scale(1.2);
   }
   to {
-    transform: rotate(1800deg);
+    transform: rotate(1800deg) scale(1);
   }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
 }
